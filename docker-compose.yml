@@ -1,0 +1,15 @@
+services:
+  tinyauth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tinyauth:latest
+    container_name: tinyauth
+    ports:
+      - "5000:5000"
+    environment:
+      - LISTEN=:5000
+      - KRATOS_ADMIN_URL=http://kratos:4434/admin/identities
+      # Use host.docker.internal if Kratos is running on the host machine:
+      # - KRATOS_ADMIN_URL=http://host.docker.internal:4434/admin/identities
+    restart: unless-stopped
